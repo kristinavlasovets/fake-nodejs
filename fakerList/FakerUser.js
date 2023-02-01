@@ -16,6 +16,7 @@ class FakerList {
 		this.faker.mersenne.seed(this.seed);
 		this.chance = new chance(this.seed);
 	}
+	
 	random() {
 		let users = [];
 		const seed = this.seed > 0 ? this.seed - 1 : this.seed + 1;
@@ -63,11 +64,13 @@ class FakerList {
 			func();
 		}
 	}
+
 	getRandomLocaleChar() {
 		const chars = this.getLocaleChars();
 		const idx = this.chance.natural({min: 0, max: chars.length - 1});
 		return chars[idx];
 	}
+
 	getLocaleChars() {
 		switch (this.locale) {
 			case hardCountries.it: {
@@ -79,6 +82,7 @@ class FakerList {
 		}
 		return enAlphabet;
 	}
+
 	applyProbabilityError(users) {
 		for (let i = 0; i < users.length; i++) {
 			const weights = this.chance.n(() => this.error, users.length);
@@ -113,6 +117,7 @@ class FakerList {
 			'addRandomLetter',
 		]);
 	}
+
 	getRandomLocaleWord(length) {
 		let word = '';
 		for (let i = 0; i < length; i++) {
@@ -120,6 +125,7 @@ class FakerList {
 		}
 		return word;
 	}
+
 	getRandomObjKey(obj) {
 		const keys = Object.keys(obj);
 
@@ -127,6 +133,7 @@ class FakerList {
 
 		return rngKey;
 	}
+
 	swapTwoLetters(text) {
 		if (text.length <= 1) return this.getRandomLocaleWord(5);
 
@@ -140,6 +147,7 @@ class FakerList {
 			)
 			.join('');
 	}
+
 	removeRandomLetter(text) {
 		if (text.length === 0) return this.getRandomLocaleWord(10);
 
@@ -152,6 +160,7 @@ class FakerList {
 			.filter((t, i) => i !== idx)
 			.join('');
 	}
+
 	addRandomLetter(text) {
 		const char = this.getRandomLocaleChar();
 		let idx = 0;
